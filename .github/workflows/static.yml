@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volumetric Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 30px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 500px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background: white;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.2);
+        }
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        img {
+            max-width: 150px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="Updated one.png" alt="Company Logo">
+        <h2>Volumetric Calculator</h2>
+        <label for="actualWeight">Actual Weight (kg):</label>
+        <input type="number" id="actualWeight" placeholder="Enter actual weight" oninput="calculateVolume()">
+        
+        <input type="number" id="length" placeholder="Enter length (cm)" oninput="calculateVolume()">
+        
+        <input type="number" id="width" placeholder="Enter width (cm)" oninput="calculateVolume()">
+        
+        <input type="number" id="height" placeholder="Enter height (cm)" oninput="calculateVolume()">
+        
+        <h3>Chargeable Weight: <span id="result">0</span> kg</h3>
+        <h3>Volume: <span id="volumeResult">0</span> CMB</h3>
+    </div>
+
+    <script>
+        function calculateVolume() {
+            let length = document.getElementById("length").value;
+            let width = document.getElementById("width").value;
+            let height = document.getElementById("height").value;
+            let actualWeight = document.getElementById("actualWeight").value;
+            
+            if(length && width && height) {
+                let volumeWeight = (length * width * height) / 6000;
+                let chargeableWeight = Math.max(volumeWeight, actualWeight);
+                let volume = (length * width * height) / 1000000; // Convert to cubic meters (CMB)
+                
+                document.getElementById("result").innerText = chargeableWeight.toFixed(2);
+                document.getElementById("volumeResult").innerText = volume.toFixed(2);
+            } else {
+                document.getElementById("result").innerText = "0";
+                document.getElementById("volumeResult").innerText = "0";
+            }
+        }
+    </script>
+</body>
+</html>
